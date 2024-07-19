@@ -96,9 +96,17 @@ export function loadProductsFetch(){
       return new Product(productDetails);
     });
     console.log('load products');
+  }).catch(() => {
+    console.log('unxepected error, please try again later in fetch')
   });
-  return promise; 
+ return promise; 
+
 }
+
+
+
+
+
 
 /*
 loadProductsFetch().then(() => {
@@ -121,6 +129,7 @@ loadProductsFetch().then(() => {
 
 
 export function loadProducts(fun){
+
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
     products = JSON.parse(xhr.response).map((productDetails) => {
@@ -129,11 +138,14 @@ export function loadProducts(fun){
     
       }
       return new Product(productDetails);
-    
     });
-
     console.log('load products');
     fun();
+  })
+
+  xhr.addEventListener('error' ,(error) => {
+    console.log('unexpected error , please try again later');
+    console.log(error);
   })
 
 
@@ -143,6 +155,7 @@ export function loadProducts(fun){
 }
 
 
+ 
 
 
 
